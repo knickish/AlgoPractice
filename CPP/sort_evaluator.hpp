@@ -1,3 +1,7 @@
+/*
+ *   Copyright (c) 2021 Kirk Nickish
+ *   All rights reserved.
+ */
 #ifndef sort_evaluator_hpp
 #define sort_evaluator_hpp
 

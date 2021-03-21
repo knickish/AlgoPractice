@@ -1,3 +1,8 @@
+/*
+ *   Copyright (c) 2021 Kirk Nickish
+ *   All rights reserved.
+ */
+ 
 #![allow(unused)]
 use rand::{distributions::Uniform, Rng}; // 0.8.0
 

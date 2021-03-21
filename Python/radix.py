@@ -1,3 +1,8 @@
+#
+#  Copyright (c) 2021 Kirk Nickish
+#  All rights reserved.
+#
+
 from sortEvaluator import EvaluateSorter
 
 def radix10(_list_arg):

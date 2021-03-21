@@ -1,3 +1,8 @@
+#
+#  Copyright (c) 2021 Kirk Nickish
+#  All rights reserved.
+#
+
 def counting(list_arg):
     if len(list_arg)<2:
         return list_arg

@@ -1,3 +1,8 @@
+#
+#  Copyright (c) 2021 Kirk Nickish
+#  All rights reserved.
+#
+
 a = 1234567
 
 def getNthDigit(num, digit):

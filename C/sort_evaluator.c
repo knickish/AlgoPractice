@@ -1,3 +1,7 @@
+/*
+ *   Copyright (c) 2021 Kirk Nickish
+ *   All rights reserved.
+ */
 #include "sort_evaluator.h"
 
 bool evaluateSorter(sorter_result sorter(int ele_count, int* int_array))

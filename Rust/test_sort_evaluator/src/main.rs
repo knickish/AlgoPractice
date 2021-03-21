@@ -1,3 +1,8 @@
+/*
+ *   Copyright (c) 2021 Kirk Nickish
+ *   All rights reserved.
+ */
+ 
 use sort_evaluator::sort_evaluator::evaluate;
 
 pub fn known_good_sorter(_ele_count: i32, elements: &mut Vec<i32>) -> bool

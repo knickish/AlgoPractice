@@ -1,3 +1,8 @@
+#
+#  Copyright (c) 2021 Kirk Nickish
+#  All rights reserved.
+#
+
 from sortEvaluator import EvaluateSorter
 import copy
 import sys, os

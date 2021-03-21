@@ -1,5 +1,10 @@
 #!/bin/bash
 
+#
+#  Copyright (c) 2021 Kirk Nickish
+#  All rights reserved.
+#
+
 # this script will compile all c files in the same folder as the script together
 # with the required sorting tester, then runs them.
 

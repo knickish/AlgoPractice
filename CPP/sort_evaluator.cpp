@@ -1,3 +1,7 @@
+/*
+ *   Copyright (c) 2021 Kirk Nickish
+ *   All rights reserved.
+ */
 #include "sort_evaluator.hpp"
 
 void SortEvaluator::error_out(sorter_result res, sorter_result orig, const char* str)

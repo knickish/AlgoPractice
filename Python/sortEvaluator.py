@@ -1,3 +1,8 @@
+#
+#  Copyright (c) 2021 Kirk Nickish
+#  All rights reserved.
+#
+
 import random
 from pprint import pprint
 import traceback

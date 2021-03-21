@@ -1,3 +1,7 @@
+/*
+ *   Copyright (c) 2021 Kirk Nickish
+ *   All rights reserved.
+ */
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdlib.h>

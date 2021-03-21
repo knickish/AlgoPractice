@@ -1,3 +1,7 @@
+/*
+ *   Copyright (c) 2021 Kirk Nickish
+ *   All rights reserved.
+ */
 #include "sort_evaluator.h"
 
 int cmpfunc (const void * a, const void * b) {
