@@ -1,3 +1,3 @@
-# ALGOTRAINER
+# AlgoPractice
 
 This is a personal project I'm using instead of Leetcode or competitors to practice implementing algorithms. The sandboxed nature of algorithm practice sites meant that writing algorithm practice code felt nothing like using actual codebases. In order to get a better feel for the languages as a whole, I started writing checker classes in the languages I wanted to practice, which I could then use to evaluate my algo implementations. Test Scripts are also included to compile and run the implemented algorithms. 

@@ -10,7 +10,6 @@ pub fn evaluate(sorter: fn(i32, &mut Vec<i32>) -> bool) -> bool
 {
     for i in 0i32..1000
     {
-        println!("Sorting list of length: {}\r", i);
         let range = Uniform::from(-255..256);
         let original: Vec<i32> = rand::thread_rng().sample_iter(&range).take(i as usize).collect();
         let mut sorter_vec = original.to_vec();
