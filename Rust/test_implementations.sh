@@ -23,6 +23,7 @@ do
         echo ""
         echo "${dirname}"
         TOML_PATH="${f}Cargo.toml"
-        cargo run -q --release --manifest-path ${TOML_PATH}
+        cargo build -q --release --manifest-path ${TOML_PATH}
+        time cargo run -q --manifest-path ${TOML_PATH}
     fi
 done

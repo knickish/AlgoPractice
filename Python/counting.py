@@ -2,6 +2,7 @@
 #  Copyright (c) 2021 Kirk Nickish
 #  All rights reserved.
 #
+from sortEvaluator import EvaluateSorter
 
 def counting(list_arg):
     if len(list_arg)<2:
@@ -19,5 +20,8 @@ def counting(list_arg):
     retList = []
     for i, v in enumerate(arr):
         for _ in range(v):
-            retList.append(i)
+            retList.append(i+_min)
     return retList
+
+model = EvaluateSorter(counting)
+model.evaluate(1000)

@@ -16,7 +16,9 @@ python3 ${DIR}/test_sort_evaluator.py
 for f in ${DIR}/*.py
 do
     if [[ ! " ${TEST_FILES[@]} " =~ " ${f} " ]]; then
-        echo "\n${f}"  
-        python3 ${f}
+        echo ""
+        echo "${f}"  
+        time python3 ${f}
+        wait $!
     fi
 done

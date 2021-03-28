@@ -23,15 +23,15 @@ def testSorter(list_arg):
 def testFailSort(list_arg):
     return list_arg
 
+blockPrint()
 model = EvaluateSorter(testSorter)
 model.evaluate(1000)
 
-blockPrint()
+
 try:
     model.replace_sorter(testFailSort)
     model.evaluate(1000)
     raise Exception("Fail model passed evaluation?????")
 except:
     enablePrint()
-    print("Known fail successfully failed")
 
