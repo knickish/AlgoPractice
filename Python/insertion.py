@@ -5,6 +5,8 @@
 
 from sortEvaluator import EvaluateSorter
 
+
+
 def insertion(list_arg):
     def get_min(list_arg_internal, start_index):
         _min = list_arg_internal[0] 
@@ -22,6 +24,6 @@ def insertion(list_arg):
             list_arg[i] = smallest
     return list_arg
 
-model = EvaluateSorter(insertion)
-model.evaluate(1000)
-    
+if __name__ == "__main__":
+    model = EvaluateSorter(insertion)
+    model.evaluate(1000)
