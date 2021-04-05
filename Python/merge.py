@@ -42,6 +42,6 @@ def merge(list_arg):
     
     return merge_sort(list_arg)
             
-
-model = EvaluateSorter(merge)
-model.evaluate(1000)
+if __name__ == "__main__":
+    model = EvaluateSorter(merge)
+    model.evaluate(1000)
