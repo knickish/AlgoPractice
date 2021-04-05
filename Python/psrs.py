@@ -74,13 +74,7 @@ def psrs(list_arg):
         pivots = [pivot_src[pi+p*x] for x in range(p)]
         return pivots
 
-    
-
-    
-        
-
-
-def multi_partition(list_arg_internal, pivot_vals, l, r):
+    def multi_partition(list_arg_internal, pivot_vals, l, r):
         l_int = l
         r_int = r-1
         l_int_list = []
@@ -108,6 +102,13 @@ def multi_partition(list_arg_internal, pivot_vals, l, r):
         for i in range(1,len(l_int_list)):
             l_int_list[i] = (l_int_list[i-1][1], l_int_list[i])
         return l_int_list
+    
+
+    
+        
+
+
+
         
     
     #setup
