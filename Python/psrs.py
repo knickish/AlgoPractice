@@ -3,11 +3,14 @@
 #  All rights reserved.
 #
 
-import random
-from insertion import insertion
-from sortEvaluator import EvaluateSorter
+#testing a parallel sorting algorithm that guarantees factor of 2 balancing across 
+#cores with the requirement of good sample distributions.
 
-def quick(list_arg):
+from sortEvaluator import EvaluateSorter
+import multiprocessing
+from insertion import insertion
+
+def psrs_quick(list_arg):
     def swap(list_arg_swap, i_1, i_2):
         tmp = list_arg_swap[i_2]
         list_arg_swap[i_2] = list_arg_swap[i_1]
@@ -55,8 +58,21 @@ def quick(list_arg):
     quick_sort(list_arg, 0, len(list_arg))
     return list_arg
 
+def psrs(list_arg):
+    cores = multiprocessing.cpu_count()
+    if not cores:
+        cores = 2
+    def get_pivots(list_arg, p, w):
+        psrs_quick(list_arg)
+        
 
-if __name__ == "__main__":
-    model = EvaluateSorter(quick)
-    model.evaluate(1000)  
+
+    def split_list(listLen, p):
+        
+    
+    #setup
+    if len(list_arg)<2:
+        return list_arg
+    last_list_index = len(list_arg)-1
+    w = n/(p**2)
 
