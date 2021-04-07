@@ -9,12 +9,16 @@
 from sortEvaluator import EvaluateSorter
 import multiprocessing
 from insertion import insertion
+import random
+from itertools import repeat
 
-def psrs_quick(list_arg):
-    def swap(list_arg_swap, i_1, i_2):
+def swap(list_arg_swap, i_1, i_2):
         tmp = list_arg_swap[i_2]
         list_arg_swap[i_2] = list_arg_swap[i_1]
         list_arg_swap[i_1] = tmp
+
+def psrs_quick(list_arg, l, r):
+    
         # return
 
     def partition(list_arg_internal, l, r):
@@ -55,26 +59,22 @@ def psrs_quick(list_arg):
             quick_sort(list_arg_internal, partition_index+1, _r)
         #return
     
-    quick_sort(list_arg, 0, len(list_arg))
+    quick_sort(list_arg, l, r)
     return list_arg
 
-def psrs(list_arg):
-    cores = multiprocessing.cpu_count()
-    if not cores:
-        cores = 2
-    def get_pivot_src(list_arg, p, w):
-        psrs_quick(list_arg)
-        indices = [1+(w*x) for x in range(p)]
-        pivot_src = [list_arg[x] for x in indices]
-        return pivot_src
-    
-    def select_pivots(pivot_list, p, n):
-        pi = int(p/(n**2))
-        pivot_src = insertion(pivot_list)
-        pivots = [pivot_src[pi+p*x] for x in range(p)]
-        return pivots
+def get_pivot_src(list_arg,l_r_tup, p, w):
+    l = l_r_tup[0]
+    r = l_r_tup[1]
+    psrs_quick(list_arg, l, r)
+    indices = [1+l+(w*x) for x in range(p)]
+    # print("indices:",indices)
+    pivot_src = [list_arg[x] for x in indices]
+    # print(pivot_src)
+    return pivot_src
 
-    def multi_partition(list_arg_internal, pivot_vals, l, r):
+def multi_partition(list_arg_internal, pivot_vals, l_r_tup):
+        l = l_r_tup[0]
+        r = l_r_tup[1]
         l_int = l
         r_int = r-1
         l_int_list = []
@@ -101,23 +101,71 @@ def psrs(list_arg):
         l_int_list[0] = (l, l_int_list[0])
         for i in range(1,len(l_int_list)):
             l_int_list[i] = (l_int_list[i-1][1], l_int_list[i])
+        print(list_arg_internal[l:r], "partitioned around", pivot_vals)
         return l_int_list
+
+
+
+def psrs(list_arg):
+# def psrs():
+    # cores = multiprocessing.cpu_count()
+    # if not cores:
+    cores = 2
+    def select_pivots(pivot_list, p, n):
+        pi = int(p/(n**2))
+        if not pi:
+            pi = 1
+        pivot_src = insertion(pivot_list)
+        pivots = [pivot_src[pi+p*x] for x in range(p)]
+        return pivots
     
+    
+    
+    
+    def order_partitions(list_arg, partition_boundaries):
+        newlist = []
+        newlist = [list_arg[i[0]:i[1]] for i in j for j in partition_boundaries]
+        newBounds = [i[-1] for i in partition_boundaries]
+        return newlist, newBounds
+
+    # setup
+    if len(list_arg)<2:
+        return list_arg
+    last_list_index = len(list_arg)-1
+    w = int(last_list_index/(cores**2))
+    # print(w)
+    start_l_r = [(int(i*len(list_arg)/cores), int((1+i)*len(list_arg)/cores)) for i in range(cores)]
+    # print(start_l_r)
+    with multiprocessing.Pool(processes=cores) as pool:
+    #     #get_pivot_src
+        nested_list = pool.starmap(get_pivot_src, zip(repeat(list_arg), start_l_r, repeat(cores), repeat(w)))
+    pool.join()
+    print(nested_list)
+    results = [i for j in nested_list for i in j]
+    print(results)
+
+    #select_pivots
+    pivots = select_pivots(results, cores, last_list_index)
+    print(pivots)
+
+    with multiprocessing.Pool(processes=cores) as pool:
+    # partition
+        nested_list = pool.starmap(multi_partition, zip(repeat(list_arg), repeat(pivots), start_l_r))
+    pool.join()
+    print(nested_list)
+    results = [i for j in nested_list for i in j]
+    print(results)
 
     
-        
+    # partition_boundaries = [[]*cores]
+    # for i in range(cores):
+    #     for j in results[i]:
+    #         partition_boundaries[i].append(j)
 
+    # new_list, new_boundaries = order_partitions(list_arg, partition_boundaries)
 
-
-        
-    
-    #setup
-    # if len(list_arg)<2:
-    #     return list_arg
-    # last_list_index = len(list_arg)-1
-    # w = n/(p**2)
 
 if __name__ == "__main__":
-    sort_list = [0,1,2,9,16,17,24,25,27,28,30,33]
-    pivot_list = [10,22]
-    print( multi_partition(sort_list, pivot_list, 0, len(sort_list)))
+    unsorted = [random.randint(0,100) for _ in range(30)]
+    print(unsorted)
+    psrs(unsorted)
