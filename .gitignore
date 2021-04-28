@@ -1,3 +1,4 @@
 *.txt
 Rust/**/target/*
 Scratch/*
+.vscode/*
