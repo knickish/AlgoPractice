@@ -9,13 +9,11 @@ int cmpfunc (const void * a, const void * b) {
    return ( *(int*)a - *(int*)b );
 }
 
-sorter_result known_good_sorter(int ele_count, int* int_array)
+vector<int>  known_good_sorter(int ele_count, vector<int> &int_array_arg)
 {
-    sorter_result ret = {0};
-    qsort(int_array, ele_count, sizeof(int), cmpfunc);
-    ret.ele_count = ele_count;
-    ret.first_ele = int_array;
-    return ret;
+    vector<int> int_array = int_array_arg;
+    std::sort(int_array.begin(), int_array.end());
+    return int_array;
 }
 
 int main(void)

@@ -4,64 +4,62 @@
  */
 #include "sort_evaluator.hpp"
 
-void SortEvaluator::error_out(sorter_result res, sorter_result orig, const char* str)
+void SortEvaluator::error_out(vector<int> res, vector<int> orig, const char* str)
 {
     printf("Sorter Error: %s", str);
     printf("\n");
-    printf("Elements Returned: %d", res.ele_count);
+    printf("Elements Returned: %ld", res.size());
     printf("\n");
     printf("Elements: \n[");
     int linebreak = 0;
-    for (int i = 0; i<res.ele_count ; i++)
+    for (int i = 0; i<res.size() ; i++)
     {
         linebreak++;
         if (linebreak%20==0)
             printf("\n");
-        printf("%d, ",*(res.first_ele+i));
+        printf("%d, ",res[i]);
         
     }
     printf("]\n\n");
-    printf("Orig elements Returned: %d", orig.ele_count);
+    printf("Orig elements Returned: %ld", orig.size());
     printf("\n");
     printf("Orig Elements: \n[");
     linebreak = 0;
-    for (int i = 0; i<orig.ele_count ; i++)
+    for (int i = 0; i<orig.size() ; i++)
     {
         linebreak++;
         if (linebreak%20==0)
             printf("\n");
-        printf("%d, ",*(orig.first_ele+i));
+        printf("%d, ", orig[i]);
         
     }
     printf("]\n\n");
 }
 
-bool SortEvaluator::evaluate(sorter_result sorter(int ele_count, int* int_array))
+bool SortEvaluator::evaluate(vector<int>  sorter(int ele_count, vector<int> &int_array))
 {
     srand (time(NULL));
 
     for (int i = 0; i<1000 ; i++)
     {
         const int ele_count = i;
-        int* arr        = new int [i];
-        int* arr_orig   = new int [i];;
+        vector<int> arr;
         for (int j = 0; j<=i;j++)
         {
-            arr[j] = (rand()%512)-256;
+            arr.push_back((rand()%512)-256);
         }
-        std::copy(arr, arr+i, arr_orig);
-        sorter_result orig = {i, arr_orig};
-        sorter_result res = sorter(i, arr);
-        if(i!=res.ele_count)
+        vector<int> orig = arr;
+        vector<int> res = sorter(i, arr);
+        if(i+1!=res.size())
         {
             error_out(res, orig, "Element count wrong");
             return false;
         }
         for (int j = 1; j<i;j++)
         {
-            if (*(arr+(j-1))>*(arr+j))
+            if (res[j-1]>res[j])
             {
-                printf("\n%d %d\n" ,*(arr+j), *(arr+j-1));
+                printf("\n%d %d\n", res[j-1] ,res[j]);
                 error_out(res, orig, "Out of order element");
                 return false;
             }

@@ -6,16 +6,15 @@
 #include "sort_evaluator.hpp"
 #include "insertion.hpp"
 
-void swap(int* int_array, int i_1, int i_2)
+void swap(vector<int> &int_array, int i_1, int i_2)
 {
     int tmp = int_array[i_2];
     int_array[i_2] = int_array[i_1];
     int_array[i_1] = tmp;
 }
 
-sorter_result insertion(int ele_count, int* int_array)
+vector<int> insertion(int ele_count, vector<int> &int_array)
 {
-    sorter_result ret = {0};
     for (int i = 0 ; i < ele_count-1 ; i++)
     {
         int l = int_array[i];
@@ -33,9 +32,7 @@ sorter_result insertion(int ele_count, int* int_array)
         }
         swap(int_array, i, lowest_index);
     }
-    ret.ele_count = ele_count;
-    ret.first_ele = int_array;
-    return ret;
+    return int_array;
 }
 
 #ifdef __main__

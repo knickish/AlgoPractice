@@ -12,7 +12,6 @@
 #include "sort_evaluator.hpp"
 #include "insertion.hpp"
 
-using std::vector;
 typedef std::unordered_map<int, int> intmap;
 
 void swap(vector<int> &vect, int i_1, int i_2)
@@ -51,9 +50,9 @@ int pivot3rand(vector<int> &list_arg_internal, int l, int r)
     {
         dict.emplace(pivots[i], pivotindexes[i]);
     }
-    int* piv_arr = &pivots[0];
-    sorter_result sorted = insertion(3, piv_arr);
-    return dict[sorted.first_ele[1]];
+    vector<int> sorted = pivots;
+    insertion(3, sorted);
+    return dict[sorted[1]];
 }
 
 int partition(vector<int> &list_arg_internal, int l, int r)     

@@ -9,23 +9,18 @@
 #include <time.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include<algorithm>
+#include <algorithm>    // std::sort
+#include <vector>       // std::vector
 
-struct sorter_result_s
-{
-    int     ele_count;
-    int*    first_ele;
-};
-
-typedef struct sorter_result_s sorter_result;
+using std::vector;
 
 class SortEvaluator
 {
     public:
 
-    void error_out(sorter_result res, sorter_result orig, const char* str);
+    void error_out(vector<int> res, vector<int>  orig, const char* str);
 
-    bool evaluate(sorter_result sorter(int ele_count, int* int_array));
+    bool evaluate(vector<int>  sorter(int ele_count, vector<int> &int_array));
 
 };
 

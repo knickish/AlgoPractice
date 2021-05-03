@@ -4,4 +4,4 @@
  */
 #pragma once
 
-sorter_result insertion(int ele_count, int* int_array);
+vector<int> insertion(int ele_count, vector<int> &int_array);
