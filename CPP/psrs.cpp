@@ -8,9 +8,12 @@
 #include <vector>
 #include <random>
 #include <functional>
-#include <algorithm>
+#include <unordered_map>
+#include "sort_evaluator.hpp"
+#include "insertion.hpp"
 
 using std::vector;
+typedef std::unordered_map<int, int> intmap;
 
 void swap(vector<int> &vect, int i_1, int i_2)
 {
@@ -41,18 +44,23 @@ int pivot3rand(vector<int> &list_arg_internal, int l, int r)
     vector<int> pivots(3);
     for (int i = 0 ; i < pivots.size(); i++)
     {
-        pivots[i] = list_arg_internal[pivotindexes[i]];
+        pivots.push_back( list_arg_internal[pivotindexes[i]]);
     }
-    piv_dict = dict(zip(pivots, pivotindexes)).copy()
-    pivots = insertion(pivots)
-    return piv_dict[pivots[1]]
+    intmap dict;
+    for (int i = 0 ; i<pivots.size();i++)
+    {
+        dict.emplace(pivots[i], pivotindexes[i]);
+    }
+    int* piv_arr = &pivots[0];
+    sorter_result sorted = insertion(3, piv_arr);
+    return dict[sorted.first_ele[1]];
 }
 
 int partition(vector<int> &list_arg_internal, int l, int r)     
 {
     int l_int = l;
     int r_int = r-1;
-    int pivotIndex = pivot3rand(vector<int> &list_arg_internal, l, r_int);
+    int pivotIndex = pivot3rand(list_arg_internal, l, r_int);
     int pivot = list_arg_internal[pivotIndex];
     swap(list_arg_internal, pivotIndex, r_int);
     r_int= r_int-1;
@@ -86,18 +94,22 @@ void quick_sort(vector<int> &list_arg_internal, int _l, int _r)
     if ((_r-_l)>1)
     {
         int partition_index = partition(list_arg_internal, _l, _r);
-        quick_sort(list_arg_internal, _l, partition_index) ;
+        quick_sort(list_arg_internal, _l, partition_index);
         quick_sort(list_arg_internal, partition_index+1, _r);
     }
 }
             
 
-void psrs_quick(vector<int> &list_arg, int l, int r)
+void psrs(vector<int> &list_arg, int l, int r)
 {
-    quick_sort(list_arg, l, r)
+    quick_sort(list_arg, l, r);
 }
 
-int main()
+int main(void)
 {
-    return 0;
+    SortEvaluator ev;
+    if(ev.evaluate(psrs))
+        return 0;
+    else;
+        return 1;
 }

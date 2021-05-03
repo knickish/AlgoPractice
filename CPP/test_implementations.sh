@@ -9,18 +9,23 @@
 # with the required sorting tester, then runs them.
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
-TEST_FILES=("${DIR}/sort_evaluator.cpp" "${DIR}/test_sort_evaluator.cpp")
+TEST_FILES=("${DIR}/sort_evaluator.cpp" "${DIR}/test_sort_evaluator.cpp" "${DIR}/insertion.cpp")
 
 g++ sort_evaluator.hpp sort_evaluator.cpp  test_sort_evaluator.cpp  -o ${DIR}/known_good
 echo ${DIR}/known_good
 ${DIR}/known_good
 rm ${DIR}/known_good
 
+g++ sort_evaluator.cpp insertion.cpp -o ${DIR}/insertion -D__main__
+echo ${DIR}/insertion
+${DIR}/insertion
+rm ${DIR}/insertion
+
 for f in ${DIR}/*.cpp
 do
     if [[ ! " ${TEST_FILES[@]} " =~ " ${f} " ]]; then
         echo "\n${f}"  
-        g++ sort_evaluator.hpp sort_evaluator.cpp  ${f}  -o ${DIR}/sort_test
+        g++ sort_evaluator.cpp insertion.cpp ${f}  -o ${DIR}/sort_test
         ${DIR}/sort_test
         rm ${DIR}/sort_test
     fi
