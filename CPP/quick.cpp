@@ -33,11 +33,13 @@ vector<int> gen_rand_pivots(int l, int r)
 int pivot3rand(vector<int> &list_arg_internal, int l, int r)
 {
     vector<int> pivotindexes = gen_rand_pivots(l,r);
+    
     vector<int> pivots(3);
-    for (int i = 0 ; i < pivots.size(); i++)
+    for (int i = 0 ; i < pivotindexes.size(); i++)
     {
         pivots.push_back( list_arg_internal[pivotindexes[i]]);
     }
+
     intmap dict;
     for (int i = 0 ; i<pivots.size();i++)
     {
@@ -45,6 +47,7 @@ int pivot3rand(vector<int> &list_arg_internal, int l, int r)
     }
     vector<int> sorted = pivots;
     insertion(3, sorted);
+
     return dict[sorted[1]];
 }
 
@@ -92,7 +95,7 @@ void quick_sort(vector<int> &list_arg_internal, int _l, int _r)
 }
             
 
-vector<int> psrs(int ele_count, vector<int> &int_array_arg)
+vector<int> quick(int ele_count, vector<int> &int_array_arg)
 {
     quick_sort(int_array_arg, 0, int_array_arg.size()-1);
     return int_array_arg;
@@ -101,7 +104,7 @@ vector<int> psrs(int ele_count, vector<int> &int_array_arg)
 int main(void)
 {
     SortEvaluator ev;
-    if(ev.evaluate(psrs))
+    if(ev.evaluate(quick))
         return 0;
     else;
         return 1;

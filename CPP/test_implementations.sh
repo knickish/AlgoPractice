@@ -26,7 +26,7 @@ echo
 for f in ${DIR}/*.cpp
 do
     if [[ ! " ${TEST_FILES[@]} " =~ " ${f} " ]]; then
-        echo "\n${f}"  
+        echo "${f}"  
         g++ sort_evaluator.cpp insertion.cpp ${f}  -o ${DIR}/sort_test
         ${DIR}/sort_test
         rm ${DIR}/sort_test
