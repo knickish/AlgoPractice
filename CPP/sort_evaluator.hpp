@@ -24,4 +24,6 @@ class SortEvaluator
 
 };
 
+void swap(vector<int> &vect, int i_1, int i_2);
+
 #endif

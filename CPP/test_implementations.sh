@@ -11,15 +11,17 @@
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 TEST_FILES=("${DIR}/sort_evaluator.cpp" "${DIR}/test_sort_evaluator.cpp" "${DIR}/insertion.cpp")
 
-g++ sort_evaluator.hpp sort_evaluator.cpp  test_sort_evaluator.cpp  -o ${DIR}/known_good
+g++ sort_evaluator.cpp  test_sort_evaluator.cpp  -o ${DIR}/known_good
 echo ${DIR}/known_good
 ${DIR}/known_good
 rm ${DIR}/known_good
+echo
 
 g++ sort_evaluator.cpp insertion.cpp -o ${DIR}/insertion -D__main__
 echo ${DIR}/insertion
 ${DIR}/insertion
 rm ${DIR}/insertion
+echo
 
 for f in ${DIR}/*.cpp
 do

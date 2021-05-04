@@ -14,13 +14,6 @@
 
 typedef std::unordered_map<int, int> intmap;
 
-void swap(vector<int> &vect, int i_1, int i_2)
-{
-    int tmp = vect[i_2];
-    vect[i_2] = vect[i_1];
-    vect[i_1] = tmp;
-}
-
 vector<int> gen_rand_pivots(int l, int r)
 {
     std::random_device rnd_device;
@@ -99,9 +92,10 @@ void quick_sort(vector<int> &list_arg_internal, int _l, int _r)
 }
             
 
-void psrs(vector<int> &list_arg, int l, int r)
+vector<int> psrs(int ele_count, vector<int> &int_array_arg)
 {
-    quick_sort(list_arg, l, r);
+    quick_sort(int_array_arg, 0, int_array_arg.size()-1);
+    return int_array_arg;
 }
 
 int main(void)

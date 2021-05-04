@@ -6,13 +6,6 @@
 #include "sort_evaluator.hpp"
 #include "insertion.hpp"
 
-void swap(vector<int> &int_array, int i_1, int i_2)
-{
-    int tmp = int_array[i_2];
-    int_array[i_2] = int_array[i_1];
-    int_array[i_1] = tmp;
-}
-
 vector<int> insertion(int ele_count, vector<int> &int_array)
 {
     for (int i = 0 ; i < ele_count-1 ; i++)

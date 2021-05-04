@@ -2,7 +2,17 @@
  *   Copyright (c) 2021 Kirk Nickish
  *   All rights reserved.
  */
+#ifndef sort_evaluator_cpp
+#define sort_evaluator_cpp
+
 #include "sort_evaluator.hpp"
+
+void swap(vector<int> &vect, int i_1, int i_2)
+{
+    int tmp = vect[i_2];
+    vect[i_2] = vect[i_1];
+    vect[i_1] = tmp;
+}
 
 void SortEvaluator::error_out(vector<int> res, vector<int> orig, const char* str)
 {
@@ -68,3 +78,5 @@ bool SortEvaluator::evaluate(vector<int>  sorter(int ele_count, vector<int> &int
     printf("Sorter passed test\n");
     return true;
 }
+
+#endif
