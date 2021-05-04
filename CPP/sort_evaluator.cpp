@@ -50,13 +50,13 @@ bool SortEvaluator::evaluate(vector<int>  sorter(int ele_count, vector<int> &int
 {
     srand (time(NULL));
 
-    for (int i = 0; i<1000 ; i++)
+    for (int i = 0; i<10000 ; i++)
     {
         const int ele_count = i;
         vector<int> arr;
         for (int j = 0; j<=i;j++)
         {
-            arr.push_back((rand()%512)-256);
+            arr.push_back(rand());
         }
         vector<int> orig = arr;
         vector<int> res = sorter(i, arr);

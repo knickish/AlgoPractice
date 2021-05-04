@@ -14,15 +14,14 @@
 
 typedef std::unordered_map<int, int> intmap;
 
-vector<int> gen_rand_pivots(int l, int r)
-{
-    std::random_device rnd_device;
-    std::mt19937 mersenne_twister {rnd_device()};
-    std::uniform_int_distribution<int> dist {l, r};
 
-    auto generator_func = [&dist, &mersenne_twister]()
+
+vector<int> gen_rand_pivots(int l, int r, std::mt19937 randomizer)
+{
+    std::uniform_int_distribution<int> dist {l, r};
+    auto generator_func = [&dist, &randomizer]()
         {
-            return dist(mersenne_twister);
+            return dist(randomizer);
         };
 
     vector<int> vec(3);
@@ -30,9 +29,9 @@ vector<int> gen_rand_pivots(int l, int r)
     return vec;
 }
 
-int pivot3rand(vector<int> &list_arg_internal, int l, int r)
+int pivot3rand(vector<int> &list_arg_internal, int l, int r, std::mt19937 randomizer)
 {
-    vector<int> pivotindexes = gen_rand_pivots(l,r);
+    vector<int> pivotindexes = gen_rand_pivots(l,r, randomizer);
     
     vector<int> pivots(3);
     for (int i = 0 ; i < pivotindexes.size(); i++)
@@ -51,11 +50,11 @@ int pivot3rand(vector<int> &list_arg_internal, int l, int r)
     return dict[sorted[1]];
 }
 
-int partition(vector<int> &list_arg_internal, int l, int r)     
+int partition(vector<int> &list_arg_internal, int l, int r, std::mt19937 randomizer)     
 {
     int l_int = l;
     int r_int = r-1;
-    int pivotIndex = pivot3rand(list_arg_internal, l, r_int);
+    int pivotIndex = pivot3rand(list_arg_internal, l, r_int, randomizer);
     int pivot = list_arg_internal[pivotIndex];
     swap(list_arg_internal, pivotIndex, r_int);
     r_int= r_int-1;
@@ -84,20 +83,23 @@ int partition(vector<int> &list_arg_internal, int l, int r)
     return l_int;
 }
 
-void quick_sort(vector<int> &list_arg_internal, int _l, int _r)
+void quick_sort(vector<int> &list_arg_internal, int _l, int _r, std::mt19937 randomizer)
 {
+    
     if ((_r-_l)>1)
     {
-        int partition_index = partition(list_arg_internal, _l, _r);
-        quick_sort(list_arg_internal, _l, partition_index);
-        quick_sort(list_arg_internal, partition_index+1, _r);
+        int partition_index = partition(list_arg_internal, _l, _r, randomizer);
+        quick_sort(list_arg_internal, _l, partition_index, randomizer);
+        quick_sort(list_arg_internal, partition_index+1, _r, randomizer);
     }
 }
             
 
 vector<int> quick(int ele_count, vector<int> &int_array_arg)
 {
-    quick_sort(int_array_arg, 0, int_array_arg.size()-1);
+    std::random_device rnd_device;
+    std::mt19937 mersenne_twister {rnd_device()};
+    quick_sort(int_array_arg, 0, int_array_arg.size()-1, mersenne_twister);
     return int_array_arg;
 }
 

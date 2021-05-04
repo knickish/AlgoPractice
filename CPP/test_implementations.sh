@@ -19,7 +19,7 @@ echo
 
 g++ sort_evaluator.cpp insertion.cpp -o ${DIR}/insertion -D__main__
 echo ${DIR}/insertion
-${DIR}/insertion
+time ${DIR}/insertion
 rm ${DIR}/insertion
 echo
 
@@ -28,7 +28,7 @@ do
     if [[ ! " ${TEST_FILES[@]} " =~ " ${f} " ]]; then
         echo "${f}"  
         g++ sort_evaluator.cpp insertion.cpp ${f}  -o ${DIR}/sort_test
-        ${DIR}/sort_test
+        time ${DIR}/sort_test
         rm ${DIR}/sort_test
     fi
 done

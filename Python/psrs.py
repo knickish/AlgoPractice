@@ -67,9 +67,7 @@ def get_pivot_src(list_arg,l_r_tup, p, w):
     r = l_r_tup[1]
     psrs_quick(list_arg, l, r)
     indices = [1+l+(w*x) for x in range(p)]
-    # print("indices:",indices)
     pivot_src = [list_arg[x] for x in indices]
-    # print(pivot_src)
     return pivot_src
 
 def multi_partition(list_arg_internal, pivot_vals, l_r_tup):
@@ -103,7 +101,6 @@ def multi_partition(list_arg_internal, pivot_vals, l_r_tup):
             l_int_list[i] = (l_int_list[i-1][1], l_int_list[i])
         if l_int_list[-1][1]!=(r-1):
             l_int_list.append((l_int_list[-1][1], (r-1)))
-        # print(list_arg_internal[l:r], "partitioned around", pivot_vals)
         return l_int_list
 
 
@@ -162,7 +159,6 @@ def psrs(list_arg_ext):
     # partition
         partition_boundaries = pool.starmap(multi_partition, zip(repeat(list_arg), repeat(pivots), start_l_r))
     pool.join()
-    # print(partition_boundaries)
 
     
 
